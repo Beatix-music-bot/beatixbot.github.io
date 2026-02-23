@@ -50,9 +50,14 @@ nav a:hover {
   margin: 0;
 }
 
+/* FIXED HERO SUBTEXT CENTERING */
 .hero p {
-  margin: 10px 0 20px;
+  color: white;
   font-size: 1.2em;
+  text-align: center;
+  margin: 10px auto 20px;
+  max-width: 700px;
+  letter-spacing: 0.5px;
 }
 
 /* GENERAL SECTIONS */
