@@ -1,1 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beatix Bot • Community</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
 
+<div id="loader"><div class="spinner"></div>Loading Beatix...</div>
+<canvas id="particles"></canvas>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="commands.html">Commands</a></li>
+<li><a href="about.html">About Us</a></li>
+<li><a href="community.html" class="active">Community</a></li>
+</ul>
+</nav>
+
+<section class="community" style="min-height: 60vh;">
+<h2>Join the Community</h2>
+<p>Need help setting up Beatix, want to report a bug, or just want to hang out? Join our official Discord support server!</p>
+<a href="https://discord.gg/pH2De7D3" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Join Support Server</a>
+</section>
+
+<footer>
+<div class="wave"></div><p>© <span id="year"></span> Beatix Music Bot</p>
+</footer>
+<div class="toggle" id="themeToggle">Theme: Auto</div>
+
+<script>
+// JS Logic (Loader, Cursor, Theme, Particles)
+window.addEventListener("load",()=>setTimeout(()=>document.getElementById("loader")?.remove(),700));
+document.getElementById("year").textContent=new Date().getFullYear();
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{cursor.style.left=e.clientX+"px";cursor.style.top=e.clientY+"px";});
+
+// Theme Logic
+const themeToggleBtn = document.getElementById("themeToggle");
+const themeStates = ["Auto", "Light", "Dark"];
+let currentTheme = localStorage.getItem("beatixTheme") || "Auto";
+function applyTheme() {
+  if (currentTheme === "Light" || (currentTheme === "Auto" && window.matchMedia("(prefers-color-scheme: light)").matches)) { document.body.classList.add("light-mode"); } 
+  else { document.body.classList.remove("light-mode"); }
+  themeToggleBtn.textContent = "Theme: " + currentTheme;
+}
+themeToggleBtn.addEventListener("click", () => { currentTheme = themeStates[(themeStates.indexOf(currentTheme) + 1) % 3]; localStorage.setItem("beatixTheme", currentTheme); applyTheme(); });
+applyTheme();
+
+// Particles
+const canvas=document.getElementById("particles"), ctx=canvas.getContext("2d");
+canvas.width=innerWidth; canvas.height=innerHeight;
+let particles=Array.from({length:25},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-.5)*0.15,dy:(Math.random()-.5)*0.15}));
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="#00eaff";ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});
+requestAnimationFrame(draw);} draw();
+</script>
+</body>
+</html>
