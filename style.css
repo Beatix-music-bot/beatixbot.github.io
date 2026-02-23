@@ -96,3 +96,108 @@ img {
 .discord-btn:hover {
     background-color: #5b6eae; /* slightly darker on hover */
 }
+/* GLOBAL STYLES */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #dff6ff;
+  color: #1c1c1c;
+}
+
+/* NAVIGATION */
+nav {
+  background: #003d4d;
+  padding: 12px;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+nav ul {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+nav a:hover {
+  color: #ff7b00;
+}
+
+/* HERO */
+.hero {
+  background: linear-gradient(120deg,#00b4db,#0083b0);
+  padding: 80px 20px;
+  text-align: center;
+  color: white;
+}
+.hero h1 {
+  font-size: 2.8em;
+  margin: 0;
+}
+.hero p {
+  margin: 10px 0 20px;
+  font-size: 1.2em;
+}
+
+/* BUTTON */
+.btn {
+  background: #ff7b00;
+  color: white;
+  padding: 14px 30px;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+.btn:hover {
+  background: #cc6200;
+  transform: scale(1.05);
+}
+
+/* SECTIONS */
+section {
+  padding: 60px 20px;
+  text-align: center;
+}
+
+/* FEATURES CARDS */
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 200px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* COMMANDS LIST */
+.cmd-list {
+  list-style: none;
+  padding: 0;
+}
+.cmd-list li {
+  background: #003d4d;
+  color: white;
+  margin: 8px auto;
+  padding: 10px 12px;
+  width: 260px;
+  border-radius: 6px;
+}
+
+/* FOOTER */
+footer {
+  background: #003d4d;
+  color: white;
+  padding: 20px;
+}
