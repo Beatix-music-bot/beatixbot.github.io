@@ -25,3 +25,83 @@ header {
 section {
   padding: 20px;
 }
+/* GENERAL STYLES */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+    background-color: #121212; /* Dark background */
+    color: white; /* Make all text white by default */
+}
+
+/* NAVIGATION BAR */
+nav {
+    background-color: #1f1f1f; /* Dark nav background */
+    padding: 15px 0;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Center nav items */
+    margin: 0;
+    padding: 0;
+}
+
+nav ul li {
+    margin: 0 20px;
+}
+
+nav ul li a {
+    color: white;           /* White text for nav links */
+    text-decoration: none;  /* Remove underline */
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav ul li a:hover {
+    color: #ff6600; /* Highlight color on hover */
+}
+
+/* SECTIONS */
+section {
+    padding: 60px 20px;
+    text-align: center;
+}
+
+/* HEADINGS */
+h1, h2 {
+    color: white; /* Ensure headings are white */
+    margin-bottom: 20px;
+}
+
+/* PARAGRAPHS */
+p {
+    color: white; /* Paragraphs in white */
+    max-width: 700px;
+    margin: 0 auto 20px auto;
+}
+
+/* COMMANDS LIST */
+section#commands ul {
+    list-style: none;
+    padding: 0;
+}
+
+section#commands ul li {
+    background-color: #1f1f1f; /* Slightly lighter dark block */
+    margin: 10px auto;
+    padding: 10px 20px;
+    border-radius: 5px;
+    max-width: 400px;
+    color: white; /* Command text white */
+}
+
+/* IMAGES */
+img {
+    max-width: 100%;
+    height: auto;
+}
