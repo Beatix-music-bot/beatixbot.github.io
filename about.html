@@ -2,30 +2,80 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>About • Beatix Bot</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Beatix Bot • About</title>
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
+<div id="loader"><div class="spinner"></div>Loading Beatix...</div>
+<canvas id="particles"></canvas>
+<div class="cursor" id="cursor"></div>
+
 <nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-  </ul>
+<ul>
+<li><a href="index.html">Home</a></li>
+<li><a href="commands.html">Commands</a></li>
+<li><a href="about.html" class="active">About Us</a></li>
+</ul>
 </nav>
 
-<section class="about-section">
-  <h1>About Beatix Music Bot</h1>
-  <p>
-    Beatix is a powerful Discord music bot that lets you play music
-    quickly and easily. It supports playlists, queues, and high-quality audio.
-  </p>
-  <a href="https://discord.gg/spxp6PaU" class="btn">Join our Discord</a>
+<section>
+<h2>Meet the Team</h2>
+<div class="team-container">
+    <div class="team-member">
+        <h3>darksky.guild</h3>
+        <p>Owner</p>
+    </div>
+    <div class="team-member">
+        <h3>td._.abhi</h3>
+        <p>Co-Owner</p>
+    </div>
+</div>
+</section>
+
+<section class="community" style="min-height: 40vh;">
+<h2>Join the Community</h2>
+<p>Need help setting up Beatix, want to report a bug, or just want to hang out? Join our official Discord support server!</p>
+<a href="https://discord.gg/AdTrvHVGnG" target="_blank" rel="noopener noreferrer" class="btn btn-outline">Join Support Server</a>
 </section>
 
 <footer>
-  <p>Beatix Music Bot Official</p>
+<div class="wave"></div><p>© <span id="year"></span> Beatix Music Bot</p>
 </footer>
+<div class="toggle" id="themeToggle">Theme: Auto</div>
 
+<script>
+// JS Logic (Loader, Cursor, Theme, Particles)
+window.addEventListener("load",()=>setTimeout(()=>document.getElementById("loader")?.remove(),700));
+document.getElementById("year").textContent=new Date().getFullYear();
+const cursor=document.getElementById("cursor");
+document.addEventListener("mousemove",e=>{cursor.style.left=e.clientX+"px";cursor.style.top=e.clientY+"px";});
+
+document.querySelectorAll(".team-member").forEach(card=>{
+card.addEventListener("mousemove",e=>{let r=card.getBoundingClientRect();card.style.transform=`rotateX(${-(e.clientY-r.top-r.height/2)/18}deg) rotateY(${(e.clientX-r.left-r.width/2)/18}deg)`;});
+card.onmouseleave=()=>card.style.transform="rotateX(0) rotateY(0)";});
+
+// Theme Logic
+const themeToggleBtn = document.getElementById("themeToggle");
+const themeStates = ["Auto", "Light", "Dark"];
+let currentTheme = localStorage.getItem("beatixTheme") || "Auto";
+function applyTheme() {
+  if (currentTheme === "Light" || (currentTheme === "Auto" && window.matchMedia("(prefers-color-scheme: light)").matches)) { document.body.classList.add("light-mode"); } 
+  else { document.body.classList.remove("light-mode"); }
+  themeToggleBtn.textContent = "Theme: " + currentTheme;
+}
+themeToggleBtn.addEventListener("click", () => { currentTheme = themeStates[(themeStates.indexOf(currentTheme) + 1) % 3]; localStorage.setItem("beatixTheme", currentTheme); applyTheme(); });
+applyTheme();
+
+// Particles
+const canvas=document.getElementById("particles"), ctx=canvas.getContext("2d");
+canvas.width=innerWidth; canvas.height=innerHeight;
+let particles=Array.from({length:25},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2+1,dx:(Math.random()-.5)*0.15,dy:(Math.random()-.5)*0.15}));
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+particles.forEach(p=>{ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);ctx.fillStyle="#00eaff";ctx.fill();p.x+=p.dx;p.y+=p.dy;if(p.x<0||p.x>canvas.width)p.dx*=-1;if(p.y<0||p.y>canvas.height)p.dy*=-1;});
+requestAnimationFrame(draw);} draw();
+</script>
 </body>
 </html>
