@@ -1,5 +1,5 @@
 html, body {
-    background-color: #ADD8E6 !important; /* light blue */
+    background-color: #ADD8E6; /* Removed !important, unless you specifically need it to override another file */
     height: 100%;
     margin: 0;
     padding: 0;
@@ -12,7 +12,7 @@ body {
 
 /* NAVIGATION BAR */
 nav {
-    background-color: #1f1f1f; /* Dark nav background */
+    background-color: #1f1f1f; 
     padding: 15px 0;
     position: sticky;
     top: 0;
@@ -22,7 +22,7 @@ nav {
 nav ul {
     list-style: none;
     display: flex;
-    justify-content: center; /* Center nav items */
+    justify-content: center; 
     margin: 0;
     padding: 0;
 }
@@ -32,14 +32,14 @@ nav ul li {
 }
 
 nav ul li a {
-    color: white;           /* White text for nav links */
-    text-decoration: none;  /* Remove underline */
+    color: white;            
+    text-decoration: none;  
     font-weight: 500;
     transition: color 0.3s;
 }
 
 nav ul li a:hover {
-    color: #ff6600; /* Highlight color on hover */
+    color: #ff6600; 
 }
 
 /* SECTIONS */
@@ -50,15 +50,16 @@ section {
 
 /* HEADINGS */
 h1, h2 {
-    color: white; /* Ensure headings are white */
+    color: #333333; /* CHANGED: Dark gray for better readability on light blue */
     margin-bottom: 20px;
 }
 
 /* PARAGRAPHS */
 p {
-    color: white; /* Paragraphs in white */
+    color: #333333; /* CHANGED: Dark gray for readability */
     max-width: 700px;
     margin: 0 auto 20px auto;
+    line-height: 1.6; /* ADDED: Slightly taller line height makes paragraphs easier to read */
 }
 
 /* COMMANDS LIST */
@@ -68,12 +69,12 @@ section#commands ul {
 }
 
 section#commands ul li {
-    background-color: #1f1f1f; /* Slightly lighter dark block */
+    background-color: #1f1f1f; 
     margin: 10px auto;
     padding: 10px 20px;
     border-radius: 5px;
     max-width: 400px;
-    color: white; /* Command text white */
+    color: white; 
 }
 
 /* IMAGES */
