@@ -1,142 +1,81 @@
-/* BASE PAGE */
-html, body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-  background: #dff6ff;
-  color: #1c1c1c;
-  min-height: 100vh;
-}
+/* ========== LOADER ========== */
+#loader{position:fixed; inset:0; background:#070b14; display:flex; flex-direction:column; align-items:center; justify-content:center; z-index:99999; color:#00eaff; font-family:sans-serif; letter-spacing:2px; opacity:1; transition:opacity .4s;}
+.spinner{width:60px;height:60px; border:4px solid #0ff2; border-top:4px solid #00eaff; border-radius:50%; animation:spin 1s linear infinite; margin-bottom:20px;}
+@keyframes spin{to{transform:rotate(360deg)}}
 
-/* NAVBAR */
-nav {
-  background: #003d4d;
-  padding: 15px 0;
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
+/* ========== BASE ========== */
+body{margin:0; font-family:Segoe UI,system-ui; background:#0b0f17; color:#eaf6ff; overflow-x:hidden; scroll-behavior:smooth; transition: background 0.4s, color 0.4s;}
+body::before{content:""; position:fixed; width:200%; height:200%; background:linear-gradient(45deg,#08121f,#0f2027,#1b2c44,#0f2027); animation:bg 160s linear infinite; z-index:-3; transition: opacity 0.4s;}
+@keyframes bg{0%{transform:translate(0,0)}50%{transform:translate(-25%,-25%)}100%{transform:translate(0,0)}}
+::-webkit-scrollbar{width:10px}
+::-webkit-scrollbar-thumb{background:#00eaff; border-radius:10px; box-shadow:0 0 10px #00eaff;}
 
-nav ul {
-  list-style: none;
-  display: flex;
-  justify-content: center;
-  gap: 30px;
-  margin: 0;
-  padding: 0;
-}
+/* ========== NAVBAR ========== */
+nav{position:sticky; top:0; background:#0008; backdrop-filter:blur(12px); z-index:999; transition: 0.4s;}
+nav ul{display:flex; gap:40px; justify-content:center; padding:18px; margin:0; list-style:none; flex-wrap:wrap;}
+nav a{color:#fff; text-decoration:none; font-weight:600; transition:.3s;}
+nav a:hover, nav a.active{color:#00eaff}
 
-nav a {
-  color: white;
-  text-decoration: none;
-  font-weight: bold;
-  transition: color 0.3s;
-}
+/* ========== HERO / SECTIONS ========== */
+section { padding: 80px 20px; text-align: center; }
+.hero h1{font-size:3rem; background:linear-gradient(90deg,#00eaff,#6a8cff); -webkit-background-clip:text; color:transparent; margin:0; animation:float 4s ease-in-out infinite;}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
 
-nav a:hover {
-  color: #ff7b00;
-}
+.visualizer{display:flex; justify-content:center; gap:6px; margin-top:35px;}
+.bar{width:6px; height:40px; background:#00eaff; border-radius:5px; animation:beat 1s infinite ease-in-out;}
+.bar:nth-child(2){animation-delay:.15s} .bar:nth-child(3){animation-delay:.3s} .bar:nth-child(4){animation-delay:.45s} .bar:nth-child(5){animation-delay:.6s}
+@keyframes beat{0%,100%{height:20px}50%{height:70px}}
 
-/* HERO SECTION */
-.hero {
-  background: linear-gradient(120deg,#00b4db,#0083b0);
-  padding: 80px 20px;
-  text-align: center;
-  color: white;
-}
+/* ========== BUTTONS ========== */
+.btn{display:inline-block; margin-top:25px; padding:14px 36px; border-radius:30px; background:linear-gradient(90deg,#00eaff,#6a8cff); color:#000; font-weight:700; text-decoration:none; transition:.3s;}
+.btn:hover{transform:scale(1.07); box-shadow:0 0 25px #00eaff88}
+.btn-outline {background: transparent; color: #00eaff; border: 2px solid #00eaff; box-shadow: 0 0 10px #00eaff33;}
+.btn-outline:hover {background: #00eaff; color: #000; box-shadow: 0 0 25px #00eaff88;}
 
-.hero h1 {
-  font-size: 2.8em;
-  margin: 0;
-}
+/* ========== CARDS & STATS ========== */
+.cards{display:flex; flex-wrap:wrap; gap:25px; justify-content:center; padding:60px 20px;}
+.card{width:230px; padding:25px; border-radius:18px; background:#0f1629; border:1px solid #ffffff15; backdrop-filter:blur(10px); transition:.2s background, .2s border, .2s color; transform-style:preserve-3d;}
+.card:hover{box-shadow:0 0 25px #00eaff55}
+.statbox{display:inline-block; margin:10px; padding:20px 30px; background:#ffffff08; border-radius:15px; transition: .4s;}
 
-/* FIXED HERO SUBTEXT CENTERING */
-.hero p {
-  color: white;
-  font-size: 1.2em;
-  text-align: center;
-  margin: 10px auto 20px;
-  max-width: 700px;
-  letter-spacing: 0.5px;
-}
+/* ========== COMMAND SEARCH ========== */
+.search input{padding:12px; width:260px; border-radius:10px; border:none; outline:none; background: #fff; color: #000;}
+.cmd{background:#111a2e; margin:12px auto; padding:14px; width:260px; border-radius:8px; transition: .4s;}
 
-/* GENERAL SECTIONS */
-section {
-  padding: 60px 20px;
-  text-align: center;
-}
+/* ========== TEAM & COMMUNITY ========== */
+.team-container {display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;}
+.team-member {background: #0f1629; padding: 25px 45px; border-radius: 18px; border: 1px solid #ffffff15; backdrop-filter: blur(10px); transition: .4s;}
+.team-member h3 { margin: 0 0 5px 0; color: #00eaff; font-size: 1.4rem;}
+.team-member p { margin: 0; color: #a9c2e3; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;}
+.team-member:hover { box-shadow: 0 0 20px #00eaff44; }
+.community p {max-width: 500px; margin: 20px auto; color: #a9c2e3; line-height: 1.6; transition: .4s;}
 
-h1, h2 {
-  color: #333;
-  margin-bottom: 20px;
-}
+/* ========== FOOTER ========== */
+footer{text-align:center; margin-top:60px;}
+.wave{height:60px; background:url("https://svgshare.com/i/15pA.svg") repeat-x; background-size:1000px 60px; animation:waveMove 20s linear infinite;}
+@keyframes waveMove{0%{background-position-x:0}100%{background-position-x:1000px}}
+footer p{margin:0;padding:25px;background:#020b12;color:#9edfff; transition: .4s;}
 
-p {
-  color: #333;
-  max-width: 700px;
-  margin: 0 auto 20px;
-  line-height: 1.6;
-}
+/* ========== TOGGLE & PARTICLES ========== */
+.toggle{position:fixed; right:20px; bottom:20px; background:#00eaff; color:#000; padding:12px 16px; border-radius:50px; cursor:pointer; font-weight:bold; user-select: none; z-index: 1000; box-shadow: 0 4px 15px #00eaff66; transition: .3s;}
+.toggle:hover { transform: scale(1.05); }
+.cursor{width:20px; height:20px; background:#00eaff; position:fixed; border-radius:50%; pointer-events:none; filter:blur(8px); z-index:9999;}
+#particles{position:fixed; top:0; left:0; width:100%; height:100%; z-index:-2;}
 
-/* BUTTONS */
-.btn, .discord-btn {
-  display: inline-block;
-  padding: 14px 30px;
-  background: #ff7b00;
-  color: white;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-}
+/* ========== LIGHT MODE ========== */
+body.light-mode { background: #f0f4f8; color: #1a202c; }
+body.light-mode::before { opacity: 0.1; }
+body.light-mode nav { background: rgba(255, 255, 255, 0.85); box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+body.light-mode nav a { color: #2d3748; }
+body.light-mode nav a:hover { color: #0077ff; }
+body.light-mode .hero h1 { background: linear-gradient(90deg, #0077ff, #00eaff); -webkit-background-clip: text; }
+body.light-mode .card, body.light-mode .team-member { background: #ffffff; border: 1px solid #e2e8f0; color: #1a202c; }
+body.light-mode .card:hover, body.light-mode .team-member:hover { box-shadow: 0 0 20px rgba(0, 119, 255, 0.2); }
+body.light-mode .statbox, body.light-mode .cmd { background: #ffffff; color: #1a202c; border: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+body.light-mode .community p { color: #4a5568; }
+body.light-mode .team-member p { color: #718096; }
+body.light-mode .team-member h3 { color: #0077ff; }
+body.light-mode footer p { background: #e2e8f0; color: #2d3748; }
+body.light-mode .search input { background: #ffffff; border: 1px solid #cbd5e0; }
 
-.btn:hover, .discord-btn:hover {
-  background: #cc6200;
-  transform: scale(1.05);
-}
-
-/* CARDS */
-.cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-}
-
-.card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  width: 200px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-}
-
-/* COMMAND LIST */
-.cmd-list {
-  list-style: none;
-  padding: 0;
-}
-
-.cmd-list li {
-  background: #003d4d;
-  color: white;
-  margin: 10px auto;
-  padding: 12px;
-  width: 260px;
-  border-radius: 6px;
-}
-
-/* IMAGES */
-img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* FOOTER */
-footer {
-  background: white;
-  color: #333;
-  padding: 20px;
-  border-top: 1px solid #ddd;
-  text-align: center;
-}
+@media(max-width:700px){ .hero h1{font-size:2.2rem} .card{width:90%} }
