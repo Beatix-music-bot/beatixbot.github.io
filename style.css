@@ -1,207 +1,134 @@
+/* BASE PAGE */
 html, body {
-    background-color: #ADD8E6; /* Removed !important, unless you specifically need it to override another file */
-    height: 100%;
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-}
-
-body {
-    min-height: 100vh;
-}
-
-/* NAVIGATION BAR */
-nav {
-    background-color: #1f1f1f; 
-    padding: 15px 0;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-nav ul {
-    list-style: none;
-    display: flex;
-    justify-content: center; 
-    margin: 0;
-    padding: 0;
-}
-
-nav ul li {
-    margin: 0 20px;
-}
-
-nav ul li a {
-    color: white;            
-    text-decoration: none;  
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav ul li a:hover {
-    color: #ff6600; 
-}
-
-/* SECTIONS */
-section {
-    padding: 60px 20px;
-    text-align: center;
-}
-
-/* HEADINGS */
-h1, h2 {
-    color: #333333; /* CHANGED: Dark gray for better readability on light blue */
-    margin-bottom: 20px;
-}
-
-/* PARAGRAPHS */
-p {
-    color: #333333; /* CHANGED: Dark gray for readability */
-    max-width: 700px;
-    margin: 0 auto 20px auto;
-    line-height: 1.6; /* ADDED: Slightly taller line height makes paragraphs easier to read */
-}
-
-/* COMMANDS LIST */
-section#commands ul {
-    list-style: none;
-    padding: 0;
-}
-
-section#commands ul li {
-    background-color: #1f1f1f; 
-    margin: 10px auto;
-    padding: 10px 20px;
-    border-radius: 5px;
-    max-width: 400px;
-    color: white; 
-}
-
-/* IMAGES */
-img {
-    max-width: 100%;
-    height: auto;
-}
-.discord-btn {
-    display: inline-block;
-    padding: 12px 24px;
-    background-color: #7289DA; /* Discord blurple */
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 6px;
-    transition: background-color 0.3s;
-}
-
-.discord-btn:hover {
-    background-color: #5b6eae; /* slightly darker on hover */
-}
-/* GLOBAL STYLES */
-body {
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
   background: #dff6ff;
   color: #1c1c1c;
+  min-height: 100vh;
 }
 
-/* NAVIGATION */
+/* NAVBAR */
 nav {
   background: #003d4d;
-  padding: 12px;
+  padding: 15px 0;
   position: sticky;
   top: 0;
   z-index: 100;
 }
+
 nav ul {
+  list-style: none;
   display: flex;
   justify-content: center;
   gap: 30px;
-  list-style: none;
   margin: 0;
   padding: 0;
 }
+
 nav a {
   color: white;
   text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s;
 }
+
 nav a:hover {
   color: #ff7b00;
 }
 
-/* HERO */
+/* HERO SECTION */
 .hero {
   background: linear-gradient(120deg,#00b4db,#0083b0);
   padding: 80px 20px;
   text-align: center;
   color: white;
 }
+
 .hero h1 {
   font-size: 2.8em;
   margin: 0;
 }
+
 .hero p {
   margin: 10px 0 20px;
   font-size: 1.2em;
 }
 
-/* BUTTON */
-.btn {
-  background: #ff7b00;
-  color: white;
-  padding: 14px 30px;
-  text-decoration: none;
-  border-radius: 8px;
-  font-weight: bold;
-  transition: 0.3s;
-}
-.btn:hover {
-  background: #cc6200;
-  transform: scale(1.05);
-}
-
-/* SECTIONS */
+/* GENERAL SECTIONS */
 section {
   padding: 60px 20px;
   text-align: center;
 }
 
-/* FEATURES CARDS */
+h1, h2 {
+  color: #333;
+  margin-bottom: 20px;
+}
+
+p {
+  color: #333;
+  max-width: 700px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+/* BUTTONS */
+.btn, .discord-btn {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #ff7b00;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+.btn:hover, .discord-btn:hover {
+  background: #cc6200;
+  transform: scale(1.05);
+}
+
+/* CARDS */
 .cards {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 20px;
 }
+
 .card {
   background: white;
   padding: 20px;
-  border-radius: 8px;
+  border-radius: 10px;
   width: 200px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.1);
 }
 
-/* COMMANDS LIST */
+/* COMMAND LIST */
 .cmd-list {
   list-style: none;
   padding: 0;
 }
+
 .cmd-list li {
   background: #003d4d;
   color: white;
-  margin: 8px auto;
-  padding: 10px 12px;
+  margin: 10px auto;
+  padding: 12px;
   width: 260px;
   border-radius: 6px;
 }
 
+/* IMAGES */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
 /* FOOTER */
 footer {
-  background: #003d4d;
-  color: white;
-  padding: 20px;
-}
- footer {
   background: white;
   color: #333;
   padding: 20px;
