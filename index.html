@@ -3,53 +3,290 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Beatix Music Bot — fast, high quality Discord music bot with powerful commands.">
 <title>Beatix Bot • Discord Music Bot</title>
-<link rel="stylesheet" href="style.css">
+
+<style>
+
+/* ============ BASE ============ */
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#dff6ff;
+color:#222;
+scroll-behavior:smooth;
+}
+
+/* ============ NAVBAR ============ */
+nav{
+background:#002b36;
+padding:15px;
+position:sticky;
+top:0;
+z-index:1000;
+}
+
+nav ul{
+display:flex;
+justify-content:center;
+gap:40px;
+list-style:none;
+margin:0;
+padding:0;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+font-weight:bold;
+transition:.3s;
+}
+
+nav a:hover,
+nav a.active{
+color:#ff7b00;
+border-bottom:2px solid #ff7b00;
+padding-bottom:3px;
+}
+
+/* ============ HERO ============ */
+.hero{
+position:relative;
+overflow:hidden;
+text-align:center;
+padding:120px 20px;
+color:white;
+background:linear-gradient(-45deg,#00b4db,#0083b0,#0072ff,#00c6ff);
+background-size:400% 400%;
+animation:gradientFlow 12s ease infinite;
+}
+
+.hero::before{
+content:"";
+position:absolute;
+width:200%;
+height:200%;
+top:-50%;
+left:-50%;
+background:radial-gradient(circle,rgba(255,255,255,0.2),transparent 70%);
+animation:rotateGlow 20s linear infinite;
+}
+
+.hero h1{
+font-size:3em;
+margin:0;
+position:relative;
+z-index:1;
+}
+
+.hero p{
+font-size:1.2em;
+margin:15px auto 25px;
+max-width:700px;
+position:relative;
+z-index:1;
+}
+
+.btn{
+display:inline-block;
+padding:15px 35px;
+background:#ff7b00;
+color:white;
+text-decoration:none;
+border-radius:10px;
+font-weight:bold;
+transition:.3s;
+position:relative;
+z-index:1;
+}
+
+.btn:hover{
+background:#cc6200;
+transform:scale(1.05);
+}
+
+/* ============ SECTIONS ============ */
+section{
+padding:70px 20px;
+text-align:center;
+}
+
+h2{
+margin-bottom:25px;
+}
+
+/* ============ CARDS ============ */
+.cards{
+display:flex;
+flex-wrap:wrap;
+justify-content:center;
+gap:25px;
+}
+
+.card{
+backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.7);
+padding:25px;
+border-radius:15px;
+width:220px;
+transition:.35s;
+border:1px solid rgba(255,255,255,0.3);
+}
+
+.card:hover{
+transform:translateY(-12px) scale(1.05);
+box-shadow:
+0 0 20px rgba(0,180,219,0.6),
+0 0 40px rgba(0,131,176,0.4);
+}
+
+/* ============ COMMAND LIST ============ */
+.cmd-list{
+list-style:none;
+padding:0;
+}
+
+.cmd-list li{
+background:#003d4d;
+color:white;
+margin:10px auto;
+padding:14px;
+width:270px;
+border-radius:7px;
+}
+
+/* ============ STATUS PANEL ============ */
+.status-panel{
+display:inline-flex;
+align-items:center;
+gap:12px;
+padding:20px 35px;
+border-radius:50px;
+background:white;
+font-size:1.2em;
+box-shadow:0 10px 25px rgba(0,0,0,0.15);
+}
+
+.status-dot{
+width:14px;
+height:14px;
+border-radius:50%;
+background:#00ff88;
+box-shadow:0 0 10px #00ff88;
+animation:pulse 1.5s infinite;
+}
+
+/* ============ FOOTER ============ */
+footer{
+background:white;
+padding:25px;
+margin-top:40px;
+border-top:1px solid #ddd;
+}
+
+/* ============ ANIMATIONS ============ */
+@keyframes gradientFlow{
+0%{background-position:0% 50%}
+50%{background-position:100% 50%}
+100%{background-position:0% 50%}
+}
+
+@keyframes rotateGlow{
+from{transform:rotate(0)}
+to{transform:rotate(360deg)}
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.4)}
+100%{transform:scale(1)}
+}
+
+</style>
 </head>
+
 <body>
 
-<!-- NAVIGATION -->
+<!-- NAVBAR -->
 <nav>
-  <ul>
-    <li><a href="index.html">Home</a></li>
-    <li><a href="about.html">About</a></li>
-   <li><a href="commands.html">Commands</a></li>
-  </ul>
+<ul>
+<li><a href="#home">Home</a></li>
+<li><a href="#features">Features</a></li>
+<li><a href="#status">Status</a></li>
+<li><a href="#commands">Commands</a></li>
+</ul>
 </nav>
 
-<!-- HERO SECTION -->
-<section class="hero">
-  <h1>Beatix Music Bot 🎶</h1>
-  <p>Your fast, fun & powerful music bot for Discord</p>
-  <a href="https://discord.gg/spxp6PaU" target="_blank" class="btn">Add to Discord</a>
+<!-- HERO -->
+<section class="hero" id="home">
+<h1>Beatix Music Bot 🎵</h1>
+<p>Your fast, fun & powerful music bot for Discord</p>
+<a href="https://discord.gg/spxp6PaU" target="_blank" class="btn">Add to Discord</a>
 </section>
 
-<!-- FEATURES SECTION -->
-<section class="features">
-  <h2>Main Features</h2>
-  <div class="cards">
-    <div class="card">⚡ Fast Music Playback</div>
-    <div class="card">📀 Playlist Support</div>
-    <div class="card">🔊 High Audio Quality</div>
-    <div class="card">📜 Easy Commands</div>
-  </div>
+<!-- FEATURES -->
+<section id="features">
+<h2>Main Features</h2>
+
+<div class="cards">
+<div class="card">⚡ Ultra Fast Playback</div>
+<div class="card">📀 Playlist Support</div>
+<div class="card">🔊 HQ Audio</div>
+<div class="card">📜 Easy Commands</div>
+</div>
 </section>
 
+<!-- STATUS -->
+<section id="status">
+<h2>Bot Status</h2>
+
+<div class="status-panel">
+<div class="status-dot"></div>
+<span id="statusText">Checking status...</span>
+</div>
+
+</section>
+
+<!-- COMMANDS -->
 <section id="commands">
-  <h2>Popular Commands</h2>
-  <ul class="cmd-list">
-    <li>/play &lt;song name&gt; — Play a track</li>
-    <li>/skip — Skip current song</li>
-    <li>/queue — Show queue</li>
-    <li>/stop — Stop music</li>
-  </ul>
+<h2>Popular Commands</h2>
+
+<ul class="cmd-list">
+<li>/play &lt;song&gt;</li>
+<li>/skip</li>
+<li>/queue</li>
+<li>/stop</li>
+</ul>
+
 </section>
 
 <!-- FOOTER -->
 <footer>
-  <p>© 2026 Beatix Music Bot</p>
+© 2026 Beatix Music Bot
 </footer>
+
+<!-- ACTIVE NAV + STATUS SCRIPT -->
+<script>
+const sections=document.querySelectorAll("section");
+const navLinks=document.querySelectorAll("nav a");
+
+window.addEventListener("scroll",()=>{
+let current="";
+sections.forEach(sec=>{
+if(scrollY>=sec.offsetTop-120)
+current=sec.id;
+});
+
+navLinks.forEach(a=>{
+a.classList.remove("active");
+if(a.href.includes(current))
+a.classList.add("active");
+});
+});
+
+setTimeout(()=>{
+document.getElementById("statusText").innerHTML="Online • 128 Servers • 38ms";
+},1500);
+</script>
 
 </body>
 </html>
