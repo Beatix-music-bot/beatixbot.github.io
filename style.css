@@ -82,3 +82,17 @@ img {
     max-width: 100%;
     height: auto;
 }
+.discord-btn {
+    display: inline-block;
+    padding: 12px 24px;
+    background-color: #7289DA; /* Discord blurple */
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background-color 0.3s;
+}
+
+.discord-btn:hover {
+    background-color: #5b6eae; /* slightly darker on hover */
+}
