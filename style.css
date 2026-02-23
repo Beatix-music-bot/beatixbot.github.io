@@ -1,16 +1,13 @@
 html, body {
     background-color: #ADD8E6 !important; /* light blue */
+    height: 100%;
     margin: 0;
     padding: 0;
     font-family: Arial, sans-serif;
 }
-/* GENERAL STYLES */
+
 body {
-   body {
-    background-color: #ADD8E6; /* light blue */
-    margin: 0;
-    font-family: Arial, sans-serif;
-}
+    min-height: 100vh;
 }
 
 /* NAVIGATION BAR */
