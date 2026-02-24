@@ -66,20 +66,20 @@
   </div>
 </section>
 
-<section class="stats reveal">
+<section class="stats reveal" id="stats-section">
   <h2>Live Bot Stats</h2>
   <div class="stats-grid">
     <div class="statbox">
       <h4>Servers</h4>
-      <span id="servers">--</span>
+      <div><span class="counter" data-target="150">0</span><span>+</span></div>
+    </div>
+    <div class="statbox">
+      <h4>Users</h4>
+      <div><span class="counter" data-target="12000">0</span><span>+</span></div>
     </div>
     <div class="statbox">
       <h4>Ping</h4>
-      <span id="ping">--</span>
-    </div>
-    <div class="statbox">
-      <h4>Status</h4>
-      <span id="status" class="status-online">Loading</span>
+      <div><span class="counter" data-target="42">0</span><span>ms</span></div>
     </div>
   </div>
 </section>
@@ -92,7 +92,7 @@
 <div class="toggle" id="themeToggle">Theme: Auto</div>
 
 <script>
-// JS Logic (Loader, Cursor, Theme, Stats, Particles)
+// Loader & Year
 window.addEventListener("load",()=>setTimeout(()=>document.getElementById("loader")?.remove(),700));
 document.getElementById("year").textContent=new Date().getFullYear();
 
@@ -128,13 +128,6 @@ themeToggleBtn.addEventListener("click", () => {
 });
 applyTheme();
 
-// Mock Stats
-setTimeout(()=>{
-  document.getElementById("servers").textContent="128"; 
-  document.getElementById("ping").textContent="42ms"; 
-  document.getElementById("status").innerHTML="🟢 Online";
-},1000);
-
 // Particles
 const canvas=document.getElementById("particles"), ctx=canvas.getContext("2d");
 function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
@@ -146,7 +139,6 @@ function draw(){
   ctx.clearRect(0,0,canvas.width,canvas.height);
   particles.forEach(p=>{
     ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-    // Dynamic particle color based on theme
     ctx.fillStyle = document.body.classList.contains('light-mode') ? "#a855f7" : "#00eaff";
     ctx.fill();
     p.x+=p.dx;p.y+=p.dy;
@@ -157,11 +149,36 @@ function draw(){
 } 
 draw();
 
-// Scroll Reveal Animation Logic
+// Scroll Reveal & Number Counter Logic
+const counters = document.querySelectorAll('.counter');
+let countersAnimated = false;
+
+const animateCounters = () => {
+  counters.forEach(counter => {
+    const updateCount = () => {
+      const target = +counter.getAttribute('data-target');
+      const count = +counter.innerText;
+      const inc = target / 100; // Speed of counting
+      if (count < target) {
+        counter.innerText = Math.ceil(count + inc);
+        setTimeout(updateCount, 20);
+      } else {
+        counter.innerText = target;
+      }
+    };
+    updateCount();
+  });
+};
+
 const observer = new IntersectionObserver((entries) => {
   entries.forEach((entry) => {
     if (entry.isIntersecting) {
       entry.target.classList.add('active');
+      // Trigger numbers when stats section is visible
+      if(entry.target.id === 'stats-section' && !countersAnimated) {
+        animateCounters();
+        countersAnimated = true; // Only run once
+      }
     }
   });
 }, { threshold: 0.1 }); 
