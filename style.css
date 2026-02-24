@@ -115,7 +115,3 @@ body.light-mode .search input { background: #ffffff; border: 1px solid #cbd5e0; 
   .cards { grid-template-columns: 1fr; padding: 0 20px; }
   .stats-grid { flex-direction: column; padding: 0 20px; }
 }
-
-/* ========== SCROLL ANIMATION ========== */
-.reveal { opacity: 0; transform: translateY(40px); transition: all 0.8s ease-out; }
-.reveal.active { opacity: 1; transform: translateY(0); }
