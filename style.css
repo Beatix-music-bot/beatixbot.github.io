@@ -5,7 +5,6 @@
 
 /* ========== BASE ========== */
 body{margin:0; font-family:'Poppins', sans-serif; background:#0f172a; color:#f8fafc; overflow-x:hidden; scroll-behavior:smooth; transition: background 0.4s, color 0.4s;}
-/* Modern Deep Animated Background */
 body::before{content:""; position:fixed; width:200%; height:200%; background:linear-gradient(45deg,#0f172a,#1e1e3f,#1a1a2e,#0f172a); animation:bg 160s linear infinite; z-index:-3; transition: opacity 0.4s;}
 @keyframes bg{0%{transform:translate(0,0)}50%{transform:translate(-25%,-25%)}100%{transform:translate(0,0)}}
 ::-webkit-scrollbar{width:10px}
@@ -67,21 +66,9 @@ section { padding: 80px 20px; text-align: center; }
 /* ========== STATS ========== */
 .stats h2 { font-size: 2rem; margin-bottom: 30px; }
 .stats-grid { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
-.statbox { background: #1e293b; padding: 20px 40px; border-radius: 12px; border: 1px solid #334155; min-width: 120px;}
-.statbox h4 { margin: 0 0 10px 0; color: #94a3b8; font-weight: 400; font-size: 1rem; }
-.statbox span { font-size: 1.5rem; font-weight: 800; color: #f8fafc; }
-
-/* ========== COMMAND SEARCH (From your old code) ========== */
-.search input{padding:12px; width:260px; border-radius:10px; border:none; outline:none; background: #fff; color: #000; font-family: 'Poppins', sans-serif;}
-.cmd{background:#1e293b; margin:12px auto; padding:14px; width:260px; border-radius:8px; transition: .4s; border: 1px solid #334155;}
-
-/* ========== TEAM & COMMUNITY (From your old code) ========== */
-.team-container {display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-top: 30px;}
-.team-member {background: #1e293b; padding: 25px 45px; border-radius: 12px; border: 1px solid #334155; backdrop-filter: blur(10px); transition: .4s;}
-.team-member h3 { margin: 0 0 5px 0; color: #a855f7; font-size: 1.4rem;}
-.team-member p { margin: 0; color: #94a3b8; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; font-size: 0.85rem;}
-.team-member:hover { box-shadow: 0 10px 25px rgba(168, 85, 247, 0.2); border-color: #a855f7; }
-.community p {max-width: 500px; margin: 20px auto; color: #94a3b8; line-height: 1.6; transition: .4s;}
+.statbox { background: #1e293b; padding: 25px 40px; border-radius: 12px; border: 1px solid #334155; min-width: 130px;}
+.statbox h4 { margin: 0 0 10px 0; color: #94a3b8; font-weight: 600; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;}
+.statbox span { font-size: 2rem; font-weight: 800; color: #f8fafc; }
 
 /* ========== FOOTER ========== */
 footer{text-align:center; margin-top:60px;}
@@ -102,10 +89,10 @@ body.light-mode nav { background: rgba(255, 255, 255, 0.85); box-shadow: 0 2px 1
 body.light-mode nav a { color: #334155; }
 body.light-mode nav a:hover { color: #a855f7; }
 body.light-mode .hero h1.gradient-title { background: linear-gradient(to right, #8b5cf6, #d946ef); -webkit-background-clip: text; }
-body.light-mode .card, body.light-mode .team-member, body.light-mode .statbox, body.light-mode .cmd { background: #ffffff; border: 1px solid #e2e8f0; }
+body.light-mode .card, body.light-mode .statbox { background: #ffffff; border: 1px solid #e2e8f0; }
 body.light-mode .card h3, body.light-mode .statbox span { color: #0f172a; }
 body.light-mode .card p, body.light-mode .hero .subtitle, body.light-mode .statbox h4 { color: #64748b; }
-body.light-mode .card:hover, body.light-mode .team-member:hover { box-shadow: 0 10px 25px rgba(139, 92, 246, 0.15); border-color: #8b5cf6; }
+body.light-mode .card:hover { box-shadow: 0 10px 25px rgba(139, 92, 246, 0.15); border-color: #8b5cf6; }
 body.light-mode footer p { background: #f1f5f9; color: #64748b; }
 body.light-mode .btn-secondary { color: #0f172a; border-color: #cbd5e1; }
 body.light-mode #loader { background: #f8fafc; color: #a855f7; }
