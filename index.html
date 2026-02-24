@@ -32,6 +32,22 @@
   #backToTop.show { opacity: 1; pointer-events: auto; }
   #backToTop:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 6px 20px rgba(0, 234, 255, 0.6); }
 
+  /* --- NEW: Audio Preview Player --- */
+  .audio-player { background: rgba(15, 22, 41, 0.6); border: 1px solid #334155; padding: 12px 20px; border-radius: 50px; display: flex; align-items: center; justify-content: space-between; max-width: 380px; margin: 30px auto 0; backdrop-filter: blur(12px); box-shadow: 0 10px 30px rgba(0,0,0,0.3); transition: transform 0.3s, border-color 0.3s; }
+  .audio-player:hover { transform: translateY(-3px); border-color: #a855f7; box-shadow: 0 10px 30px rgba(168, 85, 247, 0.2); }
+  .audio-info { display: flex; align-items: center; gap: 12px; }
+  .audio-art { width: 40px; height: 40px; border-radius: 50%; animation: spinRecord 4s linear infinite; animation-play-state: paused; border: 2px solid #00eaff; object-fit: cover; }
+  .audio-text { text-align: left; }
+  .audio-text h4 { margin: 0; color: #f8fafc; font-size: 0.9rem; white-space: nowrap; }
+  .audio-text p { margin: 0; color: #a9c2e3; font-size: 0.75rem; white-space: nowrap; }
+  .audio-controls { display: flex; align-items: center; gap: 12px; flex-grow: 1; margin-left: 15px; }
+  #play-pause-btn { background: #00eaff; color: #000; border: none; width: 35px; height: 35px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; transition: 0.3s; box-shadow: 0 0 10px rgba(0, 234, 255, 0.4); padding-left: 3px; }
+  #play-pause-btn.playing { padding-left: 0; background: #ec4899; box-shadow: 0 0 10px rgba(236, 72, 153, 0.4); color: #fff; }
+  #play-pause-btn:hover { transform: scale(1.1); }
+  .audio-progress-container { flex-grow: 1; background: #334155; height: 6px; border-radius: 3px; cursor: pointer; position: relative; overflow: hidden; min-width: 80px; }
+  .audio-progress { background: linear-gradient(90deg, #a855f7, #00eaff); width: 0%; height: 100%; border-radius: 3px; transition: width 0.1s linear; }
+  @keyframes spinRecord { 100% { transform: rotate(360deg); } }
+
   /* Testimonials Carousel */
   .testimonials { padding: 80px 0; text-align: center; overflow: hidden; }
   .testimonials h2 { font-size: 2rem; margin-bottom: 40px; padding: 0 20px; }
@@ -46,7 +62,6 @@
   .test-user span { color: #a9c2e3; font-size: 0.85rem; }
   .stars { color: #facc15; font-size: 1.2rem; margin-bottom: 10px; }
   .test-text { color: #a9c2e3; font-size: 0.95rem; line-height: 1.5; margin: 0; font-style: italic; }
-  
   @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
 
   /* FAQ Styles */
@@ -62,6 +77,10 @@
   .faq-item.active .faq-question .faq-icon { transform: rotate(45deg); color: #ec4899; }
   
   /* Light Mode Adjustments */
+  body.light-mode .audio-player { background: #ffffff; border-color: #e2e8f0; }
+  body.light-mode .audio-text h4 { color: #0f172a; }
+  body.light-mode .audio-text p { color: #64748b; }
+  body.light-mode .audio-progress-container { background: #e2e8f0; }
   body.light-mode .testimonial-card { background: #ffffff; border-color: #e2e8f0; }
   body.light-mode .test-user h4 { color: #0f172a; }
   body.light-mode .test-user span, body.light-mode .test-text { color: #64748b; }
@@ -104,6 +123,23 @@
   <div class="hero-buttons">
     <a href="#" class="btn">Add to Discord</a>
     <a href="commands.html" class="btn btn-outline">View Commands</a>
+  </div>
+
+  <div class="audio-player" data-aos="fade-up" data-aos-delay="400">
+    <div class="audio-info">
+      <img src="https://cdn-icons-png.flaticon.com/512/3083/3083417.png" alt="Song Art" class="audio-art" id="audio-art">
+      <div class="audio-text">
+        <h4>High-Quality Demo</h4>
+        <p>Beatix Audio Engine</p>
+      </div>
+    </div>
+    <div class="audio-controls">
+      <button id="play-pause-btn">▶</button>
+      <div class="audio-progress-container" id="audio-progress-container">
+        <div class="audio-progress" id="audio-progress"></div>
+      </div>
+    </div>
+    <audio id="demo-audio" src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"></audio>
   </div>
 </section>
 
@@ -230,6 +266,43 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
+// AUDIO PLAYER LOGIC
+const audio = document.getElementById("demo-audio");
+const playPauseBtn = document.getElementById("play-pause-btn");
+const progress = document.getElementById("audio-progress");
+const progressContainer = document.getElementById("audio-progress-container");
+const audioArt = document.getElementById("audio-art");
+
+playPauseBtn.addEventListener("click", () => {
+  if (audio.paused) {
+    audio.play();
+    playPauseBtn.innerHTML = "⏸";
+    playPauseBtn.classList.add("playing");
+    audioArt.style.animationPlayState = "running";
+  } else {
+    audio.pause();
+    playPauseBtn.innerHTML = "▶";
+    playPauseBtn.classList.remove("playing");
+    audioArt.style.animationPlayState = "paused";
+  }
+});
+
+audio.addEventListener("timeupdate", () => {
+  if (audio.duration) {
+    const percent = (audio.currentTime / audio.duration) * 100;
+    progress.style.width = percent + "%";
+  }
+});
+
+progressContainer.addEventListener("click", (e) => {
+  const width = progressContainer.clientWidth;
+  const clickX = e.offsetX;
+  const duration = audio.duration;
+  if(duration) {
+    audio.currentTime = (clickX / width) * duration;
+  }
+});
+
 // INFINITE CAROUSEL CLONING LOGIC
 const track = document.getElementById("carousel-track");
 track.innerHTML += track.innerHTML;
