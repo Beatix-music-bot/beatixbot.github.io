@@ -12,56 +12,22 @@
 
 <style>
   /* Click-to-Copy Hover Styles */
-  .cmd { 
-    cursor: pointer; 
-    position: relative; 
-    display: flex; 
-    align-items: center; 
-  }
-  .cmd:hover { 
-    transform: scale(1.02); 
-    border-color: #a855f7; 
-    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); 
-  }
-  .cmd::after { 
-    content: "📋 Click to copy"; 
-    position: absolute; 
-    right: 15px; 
-    font-size: 0.8rem; 
-    color: #00eaff; 
-    opacity: 0; 
-    transition: 0.3s; 
-    font-weight: 600;
-  }
+  .cmd { cursor: pointer; position: relative; display: flex; align-items: center; }
+  .cmd:hover { transform: scale(1.02); border-color: #a855f7; box-shadow: 0 0 15px rgba(168, 85, 247, 0.2); }
+  .cmd::after { content: "📋 Click to copy"; position: absolute; right: 15px; font-size: 0.8rem; color: #00eaff; opacity: 0; transition: 0.3s; font-weight: 600; }
   .cmd:hover::after { opacity: 1; }
 
   /* Toast Notification Pop-up */
-  #toast {
-    visibility: hidden; 
-    min-width: 250px; 
-    background: linear-gradient(to right, #a855f7, #ec4899);
-    color: #fff; text-align: center; border-radius: 50px; padding: 14px 24px;
-    position: fixed; z-index: 100000; left: 50%; bottom: 20px; 
-    transform: translateX(-50%);
-    font-size: 1rem; font-weight: 600; 
-    box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4);
-    opacity: 0; transition: opacity 0.4s, bottom 0.4s;
-  }
+  #toast { visibility: hidden; min-width: 250px; background: linear-gradient(to right, #a855f7, #ec4899); color: #fff; text-align: center; border-radius: 50px; padding: 14px 24px; position: fixed; z-index: 100000; left: 50%; bottom: 20px; transform: translateX(-50%); font-size: 1rem; font-weight: 600; box-shadow: 0 10px 25px rgba(168, 85, 247, 0.4); opacity: 0; transition: opacity 0.4s, bottom 0.4s; }
   #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
 
   /* Smooth Page Transition Overlay */
-  #page-transition {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: #0f172a; z-index: 99998; opacity: 1;
-    pointer-events: none; transition: opacity 0.5s ease;
-  }
+  #page-transition { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 999999; opacity: 1; pointer-events: none; transition: opacity 0.4s ease; }
   #page-transition.hidden { opacity: 0; }
   body.light-mode #page-transition { background: #f8fafc; }
 </style>
 </head>
 <body>
-
-<div id="loader"><div class="spinner"></div>Loading Beatix...</div>
 
 <div id="page-transition"></div>
 
@@ -108,9 +74,9 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
-// SMOOTH PAGE TRANSITIONS LOGIC
-document.addEventListener("DOMContentLoaded", () => {
-  setTimeout(() => { document.getElementById("page-transition").classList.add("hidden"); }, 100);
+// PERFECTED PAGE TRANSITIONS
+window.addEventListener("pageshow", () => {
+  document.getElementById("page-transition").classList.add("hidden"); 
 });
 
 document.querySelectorAll('a').forEach(link => {
@@ -119,7 +85,7 @@ document.querySelectorAll('a').forEach(link => {
     if (targetUrl && targetUrl.endsWith('.html') && targetUrl !== window.location.pathname.split('/').pop()) {
       e.preventDefault(); 
       document.getElementById("page-transition").classList.remove("hidden"); 
-      setTimeout(() => { window.location.href = targetUrl; }, 500); 
+      setTimeout(() => { window.location.href = targetUrl; }, 400); 
     }
   });
 });
@@ -148,11 +114,8 @@ mobileMenu.addEventListener('click', () => {
 // Initialize AOS Animations
 AOS.init({ once: true, offset: 100 });
 
-// Loader & Year
-window.addEventListener("load",()=>setTimeout(()=>document.getElementById("loader")?.remove(),700));
+// Year & Cursor
 document.getElementById("year").textContent=new Date().getFullYear();
-
-// Custom Cursor
 const cursor=document.getElementById("cursor");
 document.addEventListener("mousemove",e=>{cursor.style.left=e.clientX+"px";cursor.style.top=e.clientY+"px";});
 
