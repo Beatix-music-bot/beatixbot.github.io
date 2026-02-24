@@ -9,10 +9,12 @@
 
 <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
-<meta property="og:title" content="Beatix - The Ultimate Discord Music Bot">
-<meta property="og:description" content="Add Beatix to your server for high-quality music, playlist support, and fast playback.">
-<meta name="theme-color" content="#5865F2">
-
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://beatix-music-bot.github.io/beatixbot.github.io/">
+<meta property="og:title" content="Beatix Music Bot 🎧">
+<meta property="og:description" content="The ultimate high-quality music experience for your Discord server. Zero lag, playlist support, and crystal clear audio.">
+<meta property="og:image" content="https://YOUR_BANNER_IMAGE_LINK_HERE.png">
+<meta name="theme-color" content="#00eaff"> <meta name="twitter:card" content="summary_large_image">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -98,8 +100,8 @@
 <script>
 // Initialize AOS Animations
 AOS.init({
-  once: true, // Whether animation should happen only once - while scrolling down
-  offset: 100, // Offset (in px) from the original trigger point
+  once: true,
+  offset: 100,
 });
 
 // Loader & Year
@@ -159,7 +161,7 @@ function draw(){
 } 
 draw();
 
-// Number Counter Logic (Triggered purely when stats are visible)
+// Number Counter Logic 
 const counters = document.querySelectorAll('.counter');
 let countersAnimated = false;
 
