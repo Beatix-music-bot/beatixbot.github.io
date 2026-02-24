@@ -21,22 +21,33 @@
 
 <style>
   /* Scroll Progress Bar */
-  #scroll-progress {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 0%;
-    height: 4px;
-    background: linear-gradient(90deg, #a855f7, #00eaff);
-    z-index: 99999;
-    box-shadow: 0 0 10px rgba(0, 234, 255, 0.5);
-    border-top-right-radius: 4px;
-    border-bottom-right-radius: 4px;
-  }
+  #scroll-progress { position: fixed; top: 0; left: 0; width: 0%; height: 4px; background: linear-gradient(90deg, #a855f7, #00eaff); z-index: 99999; box-shadow: 0 0 10px rgba(0, 234, 255, 0.5); border-top-right-radius: 4px; border-bottom-right-radius: 4px; }
 
   /* Smooth Page Transition Overlay */
   #page-transition { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #0f172a; z-index: 999999; opacity: 1; pointer-events: none; transition: opacity 0.4s ease; }
   #page-transition.hidden { opacity: 0; }
+
+  /* Back to Top Button */
+  #backToTop { position: fixed; right: 20px; bottom: 80px; background: #00eaff; color: #000; width: 45px; height: 45px; border-radius: 50%; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 234, 255, 0.4); display: flex; justify-content: center; align-items: center; }
+  #backToTop.show { opacity: 1; pointer-events: auto; }
+  #backToTop:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 6px 20px rgba(0, 234, 255, 0.6); }
+
+  /* Testimonials Carousel */
+  .testimonials { padding: 80px 0; text-align: center; overflow: hidden; }
+  .testimonials h2 { font-size: 2rem; margin-bottom: 40px; padding: 0 20px; }
+  .carousel-container { width: 100%; max-width: 1200px; margin: 0 auto; overflow: hidden; position: relative; white-space: nowrap; mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent); }
+  .carousel-track { display: inline-flex; gap: 20px; animation: marquee 30s linear infinite; padding-left: 20px; }
+  .carousel-track:hover { animation-play-state: paused; }
+  .testimonial-card { width: 320px; white-space: normal; flex-shrink: 0; background: #0f1629; padding: 25px; border-radius: 15px; border: 1px solid #ffffff15; text-align: left; transition: transform 0.3s, box-shadow 0.3s; }
+  .testimonial-card:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0, 234, 255, 0.15); border-color: #00eaff; }
+  .test-header { display: flex; align-items: center; gap: 15px; margin-bottom: 15px; }
+  .test-avatar { width: 50px; height: 50px; border-radius: 50%; border: 2px solid #a855f7; }
+  .test-user h4 { margin: 0; color: #f8fafc; font-size: 1.1rem; }
+  .test-user span { color: #a9c2e3; font-size: 0.85rem; }
+  .stars { color: #facc15; font-size: 1.2rem; margin-bottom: 10px; }
+  .test-text { color: #a9c2e3; font-size: 0.95rem; line-height: 1.5; margin: 0; font-style: italic; }
+  
+  @keyframes marquee { 0% { transform: translateX(0); } 100% { transform: translateX(calc(-50% - 10px)); } }
 
   /* FAQ Styles */
   .faq-section { max-width: 800px; margin: 0 auto 60px; padding: 0 20px; }
@@ -50,12 +61,10 @@
   .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px; }
   .faq-item.active .faq-question .faq-icon { transform: rotate(45deg); color: #ec4899; }
   
-  /* Back to Top Button */
-  #backToTop { position: fixed; right: 20px; bottom: 80px; background: #00eaff; color: #000; width: 45px; height: 45px; border-radius: 50%; border: none; font-size: 1.5rem; font-weight: bold; cursor: pointer; z-index: 1000; opacity: 0; pointer-events: none; transition: 0.3s; box-shadow: 0 4px 15px rgba(0, 234, 255, 0.4); display: flex; justify-content: center; align-items: center; }
-  #backToTop.show { opacity: 1; pointer-events: auto; }
-  #backToTop:hover { transform: translateY(-5px) scale(1.1); box-shadow: 0 6px 20px rgba(0, 234, 255, 0.6); }
-
   /* Light Mode Adjustments */
+  body.light-mode .testimonial-card { background: #ffffff; border-color: #e2e8f0; }
+  body.light-mode .test-user h4 { color: #0f172a; }
+  body.light-mode .test-user span, body.light-mode .test-text { color: #64748b; }
   body.light-mode .faq-item { background: #ffffff; border-color: #e2e8f0; }
   body.light-mode .faq-question { color: #0f172a; }
   body.light-mode .faq-answer { color: #64748b; }
@@ -139,6 +148,58 @@
   </div>
 </section>
 
+<section class="testimonials" data-aos="fade-up" data-aos-duration="800">
+  <h2>Loved by Communities</h2>
+  <div class="carousel-container">
+    <div class="carousel-track" id="carousel-track">
+      <div class="testimonial-card">
+        <div class="test-header">
+          <img src="https://cdn.discordapp.com/embed/avatars/0.png" alt="Avatar" class="test-avatar">
+          <div class="test-user">
+            <h4>ShadowGamer</h4>
+            <span>Server Owner</span>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"The audio quality is absolutely insane. We have 50 people in VC and there is zero lag. Best bot ever!"</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="test-header">
+          <img src="https://cdn.discordapp.com/embed/avatars/1.png" alt="Avatar" class="test-avatar">
+          <div class="test-user">
+            <h4>Lofi_Girl99</h4>
+            <span>Moderator</span>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"Finally, a bot that plays my giant Spotify playlists perfectly without skipping tracks or freezing up."</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="test-header">
+          <img src="https://cdn.discordapp.com/embed/avatars/2.png" alt="Avatar" class="test-avatar">
+          <div class="test-user">
+            <h4>Dan_The_Man</h4>
+            <span>Community Manager</span>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"Beatix literally replaced 3 other music bots in our server. The /loop feature works flawlessly."</p>
+      </div>
+      <div class="testimonial-card">
+        <div class="test-header">
+          <img src="https://cdn.discordapp.com/embed/avatars/4.png" alt="Avatar" class="test-avatar">
+          <div class="test-user">
+            <h4>AnimeFanX</h4>
+            <span>Member</span>
+          </div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <p class="test-text">"I love the clean UI and how fast it responds to commands. 10/10 would highly recommend to anyone."</p>
+      </div>
+      </div>
+  </div>
+</section>
+
 <section class="faq-section" data-aos="fade-up" data-aos-duration="800">
   <h2>Frequently Asked Questions</h2>
   <div class="faq-container">
@@ -169,6 +230,11 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
+// INFINITE CAROUSEL CLONING LOGIC
+const track = document.getElementById("carousel-track");
+// Clone the cards so it creates a seamless infinite marquee effect
+track.innerHTML += track.innerHTML;
+
 // SCROLL PROGRESS BAR LOGIC
 window.addEventListener("scroll", () => {
   const scrollProgress = document.getElementById("scroll-progress");
