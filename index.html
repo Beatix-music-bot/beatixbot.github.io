@@ -110,7 +110,6 @@ const navLinks = document.getElementById('nav-links');
 
 mobileMenu.addEventListener('click', () => {
   navLinks.classList.toggle('active');
-  // Change hamburger to an X when open
   if(navLinks.classList.contains('active')) {
     mobileMenu.innerHTML = '✕';
   } else {
