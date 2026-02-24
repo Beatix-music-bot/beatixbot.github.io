@@ -20,6 +20,7 @@
 <link rel="stylesheet" href="style.css">
 
 <style>
+  /* FAQ Styles */
   .faq-section { max-width: 800px; margin: 0 auto 60px; padding: 0 20px; }
   .faq-section h2 { font-size: 2rem; margin-bottom: 30px; text-align: center; }
   .faq-item { background: #1e293b; margin-bottom: 15px; border-radius: 12px; border: 1px solid #334155; overflow: hidden; transition: 0.3s; }
@@ -30,14 +31,33 @@
   .faq-answer { max-height: 0; padding: 0 20px; color: #94a3b8; transition: max-height 0.4s ease, padding 0.4s ease; }
   .faq-item.active .faq-answer { max-height: 200px; padding: 0 20px 20px; }
   .faq-item.active .faq-question .faq-icon { transform: rotate(45deg); color: #ec4899; }
+  
+  /* Smooth Page Transition Overlay */
+  #page-transition {
+    position: fixed;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: #0f172a;
+    z-index: 99998; /* Just under the loader */
+    opacity: 1;
+    pointer-events: none; /* Lets clicks pass through when hidden */
+    transition: opacity 0.5s ease;
+  }
+  #page-transition.hidden {
+    opacity: 0;
+  }
+
+  /* Light Mode Adjustments */
   body.light-mode .faq-item { background: #ffffff; border-color: #e2e8f0; }
   body.light-mode .faq-question { color: #0f172a; }
   body.light-mode .faq-answer { color: #64748b; }
+  body.light-mode #page-transition { background: #f8fafc; }
 </style>
 </head>
 <body>
 
 <div id="loader"><div class="spinner"></div>Loading Beatix...</div>
+
+<div id="page-transition"></div>
 
 <canvas id="particles"></canvas>
 <div class="cursor" id="cursor"></div>
@@ -138,15 +158,32 @@
 <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
 <script>
+// SMOOTH PAGE TRANSITIONS LOGIC
+document.addEventListener("DOMContentLoaded", () => {
+  // Fade out the overlay when page loads
+  setTimeout(() => { document.getElementById("page-transition").classList.add("hidden"); }, 100);
+});
+
+// Intercept link clicks to fade out before leaving
+document.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', function(e) {
+    const targetUrl = this.getAttribute('href');
+    // Only apply to our own .html pages, ignoring empty links or #
+    if (targetUrl && targetUrl.endsWith('.html') && targetUrl !== window.location.pathname.split('/').pop()) {
+      e.preventDefault(); // Stop instant jump
+      document.getElementById("page-transition").classList.remove("hidden"); // Fade to black
+      setTimeout(() => { window.location.href = targetUrl; }, 500); // Wait for fade, then load next page
+    }
+  });
+});
+
 // FAQ Accordion Logic
 document.querySelectorAll('.faq-question').forEach(button => {
   button.addEventListener('click', () => {
     const faqItem = button.parentElement;
-    // Close other open FAQs
     document.querySelectorAll('.faq-item').forEach(item => {
       if(item !== faqItem) item.classList.remove('active');
     });
-    // Toggle current FAQ
     faqItem.classList.toggle('active');
   });
 });
@@ -154,14 +191,9 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // Mobile Menu Toggle Logic
 const mobileMenu = document.getElementById('mobile-menu');
 const navLinks = document.getElementById('nav-links');
-
 mobileMenu.addEventListener('click', () => {
   navLinks.classList.toggle('active');
-  if(navLinks.classList.contains('active')) {
-    mobileMenu.innerHTML = '✕';
-  } else {
-    mobileMenu.innerHTML = '☰';
-  }
+  mobileMenu.innerHTML = navLinks.classList.contains('active') ? '✕' : '☰';
 });
 
 // Initialize AOS Animations
